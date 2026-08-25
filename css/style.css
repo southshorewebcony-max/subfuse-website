@@ -1930,25 +1930,20 @@ footer {
     .nav-links {
         position: fixed;
 
-        top: 0;
-        left: 0;
-        right: 0;
-
-        /* Belt-and-suspenders: 100% is correct
-           given left/right:0, but 100vw as a
-           second declaration guarantees true
-           viewport width even in edge cases
-           (e.g. iOS Safari's dynamic viewport
-           bars). The browser just uses the
-           last valid value, so this is a safe
-           fallback rather than a conflict. */
-        width: 100%;
-        width: 100vw;
-
-        max-width: 100vw;
-
-        height: 100vh;
-        height: 100dvh;
+        /* inset:0 (top/right/bottom/left all 0)
+           replaces the old width:100vw /
+           height:100vh approach. On iOS Safari,
+           vw/vh units on a fixed element are
+           computed against a "layout viewport"
+           that doesn't reliably match the actual
+           rendered screen as the address bar and
+           home-indicator area animate — that
+           mismatch is what was leaving a gap.
+           inset:0 sizes the box directly from the
+           real viewport edges, with no vw/vh unit
+           involved, so there's nothing for iOS to
+           miscalculate. */
+        inset: 0;
 
         box-sizing: border-box;
 
@@ -1967,7 +1962,16 @@ footer {
 
         background-blend-mode: overlay, normal;
 
-        padding: 0 24px;
+        /* Horizontal padding unchanged (24px) on
+           any phone without side safe-area insets
+           — max() only adds extra inset if the
+           device actually reports one (e.g.
+           landscape on a notched iPhone), so
+           portrait spacing is identical to before */
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
 
         counter-reset: navcount;
 
