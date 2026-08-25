@@ -1928,32 +1928,25 @@ footer {
     }
 
     .nav-links {
-        /* fixed so it's positioned against the
-           real viewport, not the header.
-
-           Centering uses left:50% + transform,
-           not left/right + margin:auto — WebKit's
-           position:fixed has a known history of
-           being unreliable with margin:auto
-           centering on real devices specifically
-           during the address-bar/toolbar show-hide
-           transition (desktop Responsive Design
-           Mode has no such chrome, so it can't
-           reproduce this — that's why it looked
-           right there but not on-device). A
-           transform is resolved at compositing
-           time rather than through the layout/
-           margin system, which holds up much
-           better against that quirk. */
+        /* No centering math at all now — left and
+           right are pinned to the exact same value,
+           so the gap is equal by definition rather
+           than by computation. width is left to
+           resolve naturally from those two insets
+           (100% - 4% - 4% = 92%, matching the
+           original spec); max-width only clips it
+           on screens wide enough that it'd matter
+           (nowhere near an actual phone width). */
         position: fixed;
         top: 88px;
-        left: 50%;
+        left: 4%;
+        right: 4%;
 
-        width: 92%;
+        width: auto;
         max-width: 500px;
         height: auto;
 
-        margin: 0;
+        margin: 0 auto;
         border: 1px solid #242424;
         border-radius: 3px;
 
@@ -1978,7 +1971,7 @@ footer {
 
         counter-reset: navcount;
 
-        transform: translateX(-50%) translateY(-14px);
+        transform: translateY(-14px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -1992,7 +1985,7 @@ footer {
     }
 
     .nav-links.active {
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
