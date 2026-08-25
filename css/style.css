@@ -1940,7 +1940,7 @@ footer {
         left: 50%;
 
         width: fit-content;
-        max-width: 92vw;
+        max-width: 94vw;
         height: auto;
 
         margin: 0;
@@ -1996,7 +1996,7 @@ footer {
         counter-increment: navcount;
 
         width: 100%;
-        max-width: 340px;
+        max-width: 360px;
 
         padding: 18px 0;
 
