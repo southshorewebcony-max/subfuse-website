@@ -1940,7 +1940,7 @@ footer {
         left: 50%;
 
         width: fit-content;
-        max-width: 90vw;
+        max-width: 92vw;
         height: auto;
 
         margin: 0;
@@ -1996,7 +1996,7 @@ footer {
         counter-increment: navcount;
 
         width: 100%;
-        max-width: 300px;
+        max-width: 340px;
 
         padding: 18px 0;
 
@@ -2004,6 +2004,7 @@ footer {
         letter-spacing: 5px;
 
         text-align: center;
+        white-space: nowrap;
 
         color: #999;
 
