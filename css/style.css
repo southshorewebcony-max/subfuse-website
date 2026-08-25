@@ -1928,18 +1928,27 @@ footer {
     }
 
     .nav-links {
+        /* fixed (not absolute) so centering is
+           computed against the true visual
+           viewport — position:absolute relative
+           to header's width:100% doesn't account
+           for a page scrollbar's gutter, which is
+           what was pushing the panel visibly off
+           to one side. header height is a fixed
+           80px everywhere, so the offset below it
+           can be a literal value here. */
         position: fixed;
-        top: 0;
+        top: 88px;
         left: 0;
         right: 0;
-        bottom: 0;
 
-        width: auto;
-        max-width: none;
+        width: 92%;
+        max-width: 500px;
         height: auto;
 
-        margin: 0;
-        border: 0;
+        margin: 0 auto;
+        border: 1px solid #242424;
+        border-radius: 3px;
 
         box-sizing: border-box;
 
@@ -1950,7 +1959,7 @@ footer {
 
         gap: 4px;
 
-        padding: 0;
+        padding: 28px 20px;
 
         background:
             var(--noise-lines),
@@ -1958,9 +1967,11 @@ footer {
 
         background-blend-mode: overlay, normal;
 
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+
         counter-reset: navcount;
 
-        transform: translateY(-100%);
+        transform: translateY(-14px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -1970,11 +1981,6 @@ footer {
             opacity 0.4s ease,
             visibility 0s linear 0.5s;
 
-        /* Kept at 999, not the 9999 you specified —
-           header is 1000 and the hamburger is 1001,
-           so 9999 would bury the X behind the open
-           overlay. 999 still sits above every other
-           section on the page. */
         z-index: 999;
     }
 
