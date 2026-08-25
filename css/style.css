@@ -1928,25 +1928,22 @@ footer {
     }
 
     .nav-links {
-        /* No centering math at all now — left and
-           right are pinned to the exact same value,
-           so the gap is equal by definition rather
-           than by computation. width is left to
-           resolve naturally from those two insets
-           (100% - 4% - 4% = 92%, matching the
-           original spec); max-width only clips it
-           on screens wide enough that it'd matter
-           (nowhere near an actual phone width). */
+        /* Sized to its content instead of a fixed
+           92%/500px box — width:fit-content shrinks
+           the panel down to exactly as wide as the
+           widest link's text, so there's no leftover
+           empty space on the sides at all, and a
+           narrower box makes any residual centering
+           discrepancy far less visible. */
         position: fixed;
         top: 88px;
-        left: 4%;
-        right: 4%;
+        left: 50%;
 
-        width: auto;
-        max-width: 500px;
+        width: fit-content;
+        max-width: 90vw;
         height: auto;
 
-        margin: 0 auto;
+        margin: 0;
         border: 1px solid #242424;
         border-radius: 3px;
 
@@ -1959,7 +1956,7 @@ footer {
 
         gap: 4px;
 
-        padding: 28px 20px;
+        padding: 28px 32px;
 
         background:
             var(--noise-lines),
@@ -1971,7 +1968,7 @@ footer {
 
         counter-reset: navcount;
 
-        transform: translateY(-14px);
+        transform: translateX(-50%) translateY(-14px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -1985,7 +1982,7 @@ footer {
     }
 
     .nav-links.active {
-        transform: translateY(0);
+        transform: translateX(-50%) translateY(0);
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
