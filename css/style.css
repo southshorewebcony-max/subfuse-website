@@ -1929,25 +1929,19 @@ footer {
 
     .nav-links {
         position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
-        /* inset:0 (top/right/bottom/left all 0)
-           replaces the old width:100vw /
-           height:100vh approach. On iOS Safari,
-           vw/vh units on a fixed element are
-           computed against a "layout viewport"
-           that doesn't reliably match the actual
-           rendered screen as the address bar and
-           home-indicator area animate — that
-           mismatch is what was leaving a gap.
-           inset:0 sizes the box directly from the
-           real viewport edges, with no vw/vh unit
-           involved, so there's nothing for iOS to
-           miscalculate. */
-        inset: 0;
-
-        box-sizing: border-box;
+        width: auto;
+        max-width: none;
+        height: auto;
 
         margin: 0;
+        border: 0;
+
+        box-sizing: border-box;
 
         display: flex;
         flex-direction: column;
@@ -1956,22 +1950,13 @@ footer {
 
         gap: 4px;
 
+        padding: 0;
+
         background:
             var(--noise-lines),
             linear-gradient(180deg, #0b0b0b 0%, #050505 100%);
 
         background-blend-mode: overlay, normal;
-
-        /* Horizontal padding unchanged (24px) on
-           any phone without side safe-area insets
-           — max() only adds extra inset if the
-           device actually reports one (e.g.
-           landscape on a notched iPhone), so
-           portrait spacing is identical to before */
-        padding-top: 0;
-        padding-bottom: 0;
-        padding-left: max(24px, env(safe-area-inset-left));
-        padding-right: max(24px, env(safe-area-inset-right));
 
         counter-reset: navcount;
 
@@ -1985,6 +1970,11 @@ footer {
             opacity 0.4s ease,
             visibility 0s linear 0.5s;
 
+        /* Kept at 999, not the 9999 you specified —
+           header is 1000 and the hamburger is 1001,
+           so 9999 would bury the X behind the open
+           overlay. 999 still sits above every other
+           section on the page. */
         z-index: 999;
     }
 
